@@ -1,0 +1,5 @@
+locale/*             usr/share/locale
+bin/*                usr/local/bin
+icons/*              usr/share/mx-remaster/icons
+installed-to-live    /usr/sbin
+live-files/*         /usr/local/share/live-files
