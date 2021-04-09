@@ -16,6 +16,7 @@
 # 5) do a recursive umount
 # 6) Delete touched files and created directories from the *original* FS
 
+set -x
 
 ME=${0##*/}
 
@@ -39,7 +40,8 @@ DEF_REPO="us"
 PRETEND=
 
 PW_FILES="/etc/passwd /etc/shadow /etc/gshadow /etc/group"
-MUNGE_FILES="/etc/slim.conf /etc/lightdm/lightdm.conf"
+# MUNGE_FILES="/etc/slim.conf /etc/lightdm/lightdm.conf"
+MUNGE_FILES=""
 BIND_FILES="$PW_FILES"
 
 # LIVE_FILE_LIST="
