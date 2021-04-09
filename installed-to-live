@@ -42,56 +42,58 @@ PW_FILES="/etc/passwd /etc/shadow /etc/gshadow /etc/group"
 MUNGE_FILES="/etc/slim.conf /etc/lightdm/lightdm.conf"
 BIND_FILES="$PW_FILES"
 
-LIVE_FILE_LIST="
-/etc/desktop-session/startup
-/etc/fstab
-/etc/grub.d/*
-/etc/init.d/checkfs.sh
-/etc/init.d/console-setup.sh
-/etc/init.d/cron
-/etc/init.d/debian/*
-/etc/init.d/gpm
-/etc/init.d/hwclock.sh
-/etc/init.d/keyboard-setup.sh
-/etc/init.d/sendsigs
-/etc/init.d/slim
-/etc/init.d/udev
-/etc/init.d/umountfs
-/etc/issue
-/etc/rc.local
-/etc/rc?.d/*virtualbox*
-/etc/skel/.fluxbox/menu
-/etc/skel/.icewm/menu
-/etc/skel/.jwm/menu
-/etc/skel/Desktop/Installer.desktop
-/etc/skel/.idesktop/gazelle.lnk
-/etc/udev/rules.d/90-fstab-automount.rules
-/lib/udev/rules.d/92-console-font.rules
-/usr/share/applications/mx/minstall.desktop
-/usr/share/applications/antix/minstall.desktop
-/usr/share/applications/antix/antixsources.desktop
-/usr/share/applications/antix/persist-config.desktop
-/usr/share/applications/antix/persist_setup.desktop
-/usr/share/applications/antix/persist_save.desktop
-/usr/share/applications/antix/remaster.desktop
-"
+# LIVE_FILE_LIST="
+# /etc/desktop-session/startup
+# /etc/fstab
+# /etc/grub.d/*
+# /etc/init.d/checkfs.sh
+# /etc/init.d/console-setup.sh
+# /etc/init.d/cron
+# /etc/init.d/debian/*
+# /etc/init.d/gpm
+# /etc/init.d/hwclock.sh
+# /etc/init.d/keyboard-setup.sh
+# /etc/init.d/sendsigs
+# /etc/init.d/slim
+# /etc/init.d/udev
+# /etc/init.d/umountfs
+# /etc/issue
+# /etc/rc.local
+# /etc/rc?.d/*virtualbox*
+# /etc/skel/.fluxbox/menu
+# /etc/skel/.icewm/menu
+# /etc/skel/.jwm/menu
+# /etc/skel/Desktop/Installer.desktop
+# /etc/skel/.idesktop/gazelle.lnk
+# /etc/udev/rules.d/90-fstab-automount.rules
+# /lib/udev/rules.d/92-console-font.rules
+# /usr/share/applications/mx/minstall.desktop
+# /usr/share/applications/antix/minstall.desktop
+# /usr/share/applications/antix/antixsources.desktop
+# /usr/share/applications/antix/persist-config.desktop
+# /usr/share/applications/antix/persist_setup.desktop
+# /usr/share/applications/antix/persist_save.desktop
+# /usr/share/applications/antix/remaster.desktop
+# "
+LIVE_FILE_LIST=""
 
-GENERAL_LIVE_FILE_LIST="
-/etc/adjtime
-/etc/default/*
-/etc/dhcp/dhclient.conf
-/etc/dnsmasq.conf
-/etc/hostname
-/etc/init.d/ifplugd
-/etc/init.d/networking
-/etc/kbd/config
-/etc/lightdm/lightdm.conf
-/etc/modprobe.d/*
-/etc/network/interfaces
-/etc/network/interfaces.d/*
-/etc/slim.conf
-/lib/udev/ifupdown-hotplug
-"
+# GENERAL_LIVE_FILE_LIST="
+# /etc/adjtime
+# /etc/default/*
+# /etc/dhcp/dhclient.conf
+# /etc/dnsmasq.conf
+# /etc/hostname
+# /etc/init.d/ifplugd
+# /etc/init.d/networking
+# /etc/kbd/config
+# /etc/lightdm/lightdm.conf
+# /etc/modprobe.d/*
+# /etc/network/interfaces
+# /etc/network/interfaces.d/*
+# /etc/slim.conf
+# /lib/udev/ifupdown-hotplug
+# "
+GENERAL_LIVE_FILE_LIST=""
 
 usage() {
     local ret=${1:-0}
@@ -370,7 +372,7 @@ do_start() {
     fi
 
     write_conf_file $conf_file
-}
+}   
 
 do_read_only() {
     local conf_file=$1  work_dir=$2  dirs=$3
@@ -446,7 +448,7 @@ do_repo() {
     copy_dir=$repo_dir$real_dir
     pretend mkdir -p $copy_dir
     pretend cp $real_dir/*.list $copy_dir
-    pretend localize-repo --dir=$copy_dir $country
+    # pretend localize-repo --dir=$copy_dir $country
     bind_mount_template "$repo_dir"  "$BIND_ROOT" "$REAL_ROOT"
 }
 
