@@ -16,9 +16,10 @@
 # 5) do a recursive umount
 # 6) Delete touched files and created directories from the *original* FS
 
-set -x
+# set -x
 
 ME=${0##*/}
+
 
 USER_PW=demo:demo
 ROOT_PW=root:root
@@ -294,6 +295,7 @@ copy_files() {
 
     pretend rm -rf $to_dir
     pretend mkdir -p $to_dir
+    # 선언한 파일 목록을 $from_dir 경로로 변경
     local list=$(echo "$files" | grep -v "^\s*#\s*" | sed 's/\s*#.*//' \
         | grep "^/" | sed "s=^=$from_dir=")
 
@@ -661,6 +663,7 @@ bind_mount_template() {
     local file
     while read file; do
         local base=${file#$template_dir}
+        # echo "filename : $base";
         local targ=$bind_root$base
         local orig=$real_root$base
         if test -L "$file"; then

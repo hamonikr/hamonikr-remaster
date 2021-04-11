@@ -389,7 +389,8 @@ function set_iso_name {
 function make_squashfs {
 	cd $REM
 	echo -e "Good. We are now creating your iso. Sit back and relax, this takes some time (some 20 minutes on an AMD +2500 for a 680MB iso). \n"
-	mksquashfs $1 new-iso/antiX/linuxfs -comp xz
+	# mksquashfs $1 new-iso/antiX/linuxfs -comp xz
+	mksquashfs $1 new-iso/casper/filesystem.squashfs -comp xz
 	if [[ $? -ne 0 ]]; then
 		echo -e "Error making linuxfs file. Script aborted.\n" 
 		exit 5
@@ -399,7 +400,8 @@ function make_squashfs {
 # makes iso named $1 
 function make_iso {
 	cd $STARTPATH
-	genisoimage -l -V antiXlive -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/isolinux.cat -o $1 $REM/new-iso && isohybrid $1 $REM/new-iso
+	# genisoimage -l -V hamonikr-live -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/isolinux.cat -o $1 $REM/new-iso && isohybrid $1 $REM/new-iso
+	genisoimage -l -V hamonikr-live -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/bppt.cat -o $1 $REM/new-iso && isohybrid $1 $REM/new-iso
 	if [[ $? -eq 0 ]]; then 
 		echo
 		echo "Done. You will find your very own remastered home-made Linux here: $1"
